@@ -1,0 +1,60 @@
+name: Deploy to GitHub Pages
+
+on:
+  # english-phrasebook.html を更新して push すれば自動で公開サイトが最新になる
+  push:
+    branches: [main]
+    paths:
+      - 'english-phrasebook.html'
+      - '.github/workflows/deploy.yml'
+  # 手動実行（Actions タブの "Run workflow"）
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同時デプロイを1本に絞る（進行中のものはキャンセルせず、最新版を必ず反映）
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build site
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site
+          # 最新の english-phrasebook.html を index.html として配置する
+          cp english-phrasebook.html _site/index.html
+          # 直リンク互換のため元ファイル名でも配置する
+          cp english-phrasebook.html _site/english-phrasebook.html
+          # Jekyll の処理を無効化（_ 始まりのファイルなどをそのまま配信）
+          touch _site/.nojekyll
+          ls -la _site
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
