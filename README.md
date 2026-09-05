@@ -23,11 +23,29 @@ ITサービス企業で働く人のための英語フレーズ帳です。入社
 ## 構成
 
 ```
-english-phrasebook.html   ← 本体（これ1ファイルで完結。編集するのはここだけ）
+english-phrasebook.html       ← 本体（これ1ファイルで完結。編集するのはここだけ）
+icons/                        ← ファビコン・アプリアイコン一式
+site.webmanifest              ← PWA / Android 用マニフェスト
+browserconfig.xml             ← Windows タイル用設定
 .github/workflows/deploy.yml  ← 公開用の GitHub Actions ワークフロー
 ```
 
-外部依存は Google Fonts のみで、CSS も JavaScript もすべて HTML に内包しています。ローカルで確認したいときは `english-phrasebook.html` をそのままブラウザで開いてください。
+外部依存は Google Fonts のみで、CSS も JavaScript もすべて HTML に内包しています。ローカルで確認したいときは `english-phrasebook.html` をそのままブラウザで開いてください（アイコンのパスは相対指定なので、ローカルでも正しく表示されます）。
+
+### アイコン
+
+| 用途 | ファイル |
+|---|---|
+| ブラウザのタブ（レガシー・IE 含む） | `icons/favicon.ico`（16/24/32/48/64 のマルチ解像度） |
+| ブラウザのタブ（PNG） | `icons/favicon-16x16` 〜 `192x192.png` |
+| iOS / iPadOS ホーム画面 | `icons/apple-touch-icon.png`（180）ほか 120 / 152 / 167 |
+| macOS Safari ピン留めタブ | `icons/safari-pinned-tab.svg`（単色マスク） |
+| Android / Chrome / PWA | `icons/web-app-manifest-192・512.png` |
+| Android アダプティブアイコン | `icons/maskable-icon-192・512.png`（中央80%セーフゾーン対応） |
+| Windows タイル | `icons/mstile-70・150・310x150・310x310.png` |
+| SNS シェア（OGP / X） | `icons/og-image.jpg`（1200x630） |
+
+アイコンを差し替えるときは元画像から `icons/` 以下を作り直し、push すれば自動で反映されます。
 
 ## 利用規約・免責事項
 

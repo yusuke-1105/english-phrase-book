@@ -1,0 +1,22 @@
+{
+  "name": "会社の英語、まるごと1冊",
+  "short_name": "会社の英語",
+  "description": "ITサービス企業で働く人のための英語フレーズ帳。22章271フレーズ。",
+  "lang": "ja",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "id": "/english-phrase-book/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F5F8FC",
+  "theme_color": "#F5F8FC",
+  "categories": ["education", "books", "productivity"],
+  "icons": [
+    { "src": "icons/favicon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/web-app-manifest-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/web-app-manifest-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-icon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/maskable-icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

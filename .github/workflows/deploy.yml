@@ -1,12 +1,9 @@
 name: Deploy to GitHub Pages
 
 on:
-  # english-phrasebook.html を更新して push すれば自動で公開サイトが最新になる
+  # main に push すれば自動で公開サイトが最新になる
   push:
     branches: [main]
-    paths:
-      - 'english-phrasebook.html'
-      - '.github/workflows/deploy.yml'
   # 手動実行（Actions タブの "Run workflow"）
   workflow_dispatch:
 
@@ -36,9 +33,14 @@ jobs:
           cp english-phrasebook.html _site/index.html
           # 直リンク互換のため元ファイル名でも配置する
           cp english-phrasebook.html _site/english-phrasebook.html
+          # アイコン一式と各プラットフォーム用の設定ファイル
+          cp -R icons _site/icons
+          cp site.webmanifest browserconfig.xml _site/
+          # /favicon.ico を直接見に来るクライアント向けに公開ルートへも配置する
+          cp icons/favicon.ico _site/favicon.ico
           # Jekyll の処理を無効化（_ 始まりのファイルなどをそのまま配信）
           touch _site/.nojekyll
-          ls -la _site
+          ls -la _site _site/icons
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
